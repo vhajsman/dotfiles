@@ -1,0 +1,32 @@
+#!/bin/sh
+
+setBrightness () {
+    echo $1 | sudo tee /sys/class/backlight/intel_backlight/brightness
+}
+
+MAX=$(cat /sys/class/backlight/intel_backlight/max_brightness)
+CURRENT=$(cat /sys/class/backlight/intel_backlight/brightness)
+STEP_PERCENT=10
+STEP=$(($MAX/$STEP_PERCENT))
+
+if [ "$1" = "--up" ]; then
+    if [ $(($CURRENT+$STEP)) > $MAX ]; then
+        setBrightness $MAX
+    else
+        setBrightness $(($CURRENT+$STEP))
+    fi
+
+    exit 0
+fi
+
+if [ "$1" = "--down" ]; then
+    if [ $(($CURRENT-$STEP)) > $STEP ]; then
+        setBrightness $(($CURRENT-$STEP))
+    else
+        setBrightness $STEP
+    fi
+
+    exit 0
+fi
+
+exit 1

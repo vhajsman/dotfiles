@@ -1,0 +1,21 @@
+font pango:Hack Nerd Font Mono 8
+
+set $color_bg           #523d6499
+set $color_bg_inactive  #3636364d
+set $color_fg           #ffffff
+set $color_bg_u         #ff0000
+set $color_indicator    #a8a3c1
+set $color_fg_inactive  #969696
+set $color_ws_focused   #523d6480
+set $color_bar          #523d64aa
+set $color_separator    #191919
+
+client.focused          $color_bg          $color_bg          $color_fg          $color_indicator
+client.unfocused        $color_bg_inactive $color_bg_inactive $color_fg_inactive $color_bg_inactive
+client.focused_inactive $color_bg_inactive $color_bg_inactive $color_fg_inactive $color_bg_inactive
+client.urgent           $color_bg_u        $color_bg_u        $color_fg          $color_bg_u
+
+include ~/.config/i3/include/*.conf
+include ~/.config/i3/include/bindings/*.conf
+
+for_window [class="^floatingbt$"] floating enable, border normal
